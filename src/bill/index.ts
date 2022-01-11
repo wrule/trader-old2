@@ -120,6 +120,13 @@ class Bill {
   }
 
   public LogSummary() {
+    // 盈利次数，亏损次数
+    console.log(
+      '交易次数',
+      this.Length,
+      '胜率',
+      `${this.WinRate.toFixed(4)}%`.yellow,
+    );
     console.log(
       '账单结果',
       this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
@@ -132,12 +139,11 @@ class Bill {
       '对比指数',
       `${this.BetterRate.toFixed(4)}%`[this.IsBetter ? 'green' : 'red'],
     );
-    console.log(
-      '交易次数',
-      this.Length,
-      '胜率',
-      `${this.WinRate.toFixed(4)}%`.yellow,
-    );
+    // 单次 最小 平均 最大 盈利
+    // 单次 最小 平均 最大 亏损
+    // 连续最大亏损 次数 总亏损 最小 平均 最大
+    // 连续最大盈利 次数 总盈利 最小 平均 最大
+    // 年化 月化 收益
   }
 
   public Log() {
