@@ -1,5 +1,7 @@
+import moment from "moment";
 import { IFrame } from "../frame";
 import { Trader } from "../trader";
+import 'colors';
 
 export
 class Bill {
@@ -21,6 +23,14 @@ class Bill {
    */
   public get BillItems() {
     return this.billItems.slice(0);
+  }
+
+  public get First() {
+    return this.billItems[0];
+  }
+
+  public get Last() {
+    return this.billItems[this.billItems.length - 1];
   }
 
   /**
@@ -82,6 +92,13 @@ class Bill {
       this.recording = false;
     }
   }
+
+  public Log() {
+    this.billItems.forEach((item) => {
+      console.log();
+      item.Log();
+    });
+  }
 }
 
 class BillItem {
@@ -108,6 +125,31 @@ class BillItem {
 
   public get ProfitRate() {
     return (this.Profit / this.buyTrade.funds) * 100;
+  }
+
+  public Log() {
+    console.log(
+      '交易结果',
+      this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
+      '盈利率',
+      `${this.ProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
+    );
+    console.log(
+      `[${moment(this.buyTrade.time).format('YYYY-MM-DD HH:mm:ss')}]`,
+      '买入'.bgGreen,
+      '放出资金',
+      this.buyTrade.funds.toFixed(4).yellow,
+      '买入资产',
+      this.buyTrade.assets.toFixed(4).yellow,
+    );
+    console.log(
+      `[${moment(this.sellTrade.time).format('YYYY-MM-DD HH:mm:ss')}]`,
+      '卖出'.bgBlue,
+      '卖出资产',
+      this.sellTrade.assets.toFixed(4).yellow,
+      '收回资金',
+      this.sellTrade.funds.toFixed(4).yellow,
+    );
   }
 }
 
