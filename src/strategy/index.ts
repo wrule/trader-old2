@@ -22,13 +22,16 @@ abstract class Strategy {
     return this.trader;
   }
 
-  protected abstract Watch(frame?: IFrame, index?: number): void;
+  protected abstract Watch(frame: IFrame, index: number): void;
 
   public Backtesting(frames: IFrame[]) {
     this.frames = frames;
     this.frames.forEach((frame, index) => {
       this.index = index;
       this.Watch(this.Frame, this.Index);
+      if (index === this.frames.length - 1) {
+        this.Trader.Sell(frame);
+      }
     });
   }
 }
