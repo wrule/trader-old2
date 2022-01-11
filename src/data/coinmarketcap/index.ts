@@ -8,5 +8,26 @@ function Load(data: any): IFrame[] {
       time: Number(key) * 1000,
       price: ((value as any)?.v || [])[0] as number,
     }));
-  return points;
+  console.log(points.length);
+  const result: IFrame[] = [];
+  points.forEach((item, index) => {
+    if (item.time == null || isNaN(item.time)) {
+      throw new Error(`index: ${index} time非法`);
+    }
+    if (item.price == null || isNaN(item.price)) {
+      throw new Error(`index: ${index} price非法`);
+    }
+    if (result.length > 0) {
+      const day = moment(item.time);
+      const prevDay = moment(result[result.length - 1].time);
+      const dayDiff = day.endOf('day').diff(prevDay.startOf('day'), 'day');
+      if (dayDiff === 0) {
+        result.pop();
+      } else if (dayDiff !== 1) {
+        throw new Error(`index: ${index} time错乱`);
+      }
+    }
+    result.push(item);
+  });
+  return result;
 }
