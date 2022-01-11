@@ -11,6 +11,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@wrule/nums": "^0.2.0"
+    "@wrule/nums": "^0.2.0",
+    "moment": "^2.29.1"
   }
 }

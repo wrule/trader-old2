@@ -23,6 +23,11 @@
     "@types/papaparse" "^5.3.1"
     papaparse "^5.3.1"
 
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "http://npm.perfma-inc.net:80/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha1-sr52n6MZQL6e7qZGnAdeNQBvo9M=
+
 papaparse@^5.3.1:
   version "5.3.1"
   resolved "http://npm.perfma-inc.net:80/papaparse/-/papaparse-5.3.1.tgz#770b7a9124d821d4b2132132b7bd7dce7194b5b1"
