@@ -18,9 +18,9 @@ function Load(data: any): IFrame[] {
       throw new Error(`index: ${index} price非法`);
     }
     if (result.length > 0) {
-      const day = moment(item.time);
-      const prevDay = moment(result[result.length - 1].time);
-      const dayDiff = day.endOf('day').diff(prevDay.startOf('day'), 'day');
+      const time = moment(item.time);
+      const prevTime = moment(result[result.length - 1].time);
+      const dayDiff = time.endOf('day').diff(prevTime.startOf('day'), 'day');
       if (dayDiff === 0) {
         result.pop();
       } else if (dayDiff !== 1) {
