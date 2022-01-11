@@ -9,29 +9,37 @@ class Bill {
   private buyTrade!: ITrade;
   private sellTrade!: ITrade;
 
+  private recording = false;
+
   public RecordBuy(
     frame: IFrame,
     trader: Trader,
   ) {
-    this.buyTrade = {
-      time: frame.time,
-      price: frame.price,
-      funds: trader.Funds,
-      assets: trader.Assets,
-    };
+    if (!this.recording) {
+      this.buyTrade = {
+        time: frame.time,
+        price: frame.price,
+        funds: trader.Funds,
+        assets: trader.Assets,
+      };
+      this.recording = true;
+    }
   }
 
   public RecordSell(
     frame: IFrame,
     trader: Trader,
   ) {
-    this.sellTrade = {
-      time: frame.time,
-      price: frame.price,
-      funds: trader.Funds,
-      assets: trader.Assets,
-    };
-    this.billItems.push(new BillItem(this.buyTrade, this.sellTrade));
+    if (this.recording) {
+      this.sellTrade = {
+        time: frame.time,
+        price: frame.price,
+        funds: trader.Funds,
+        assets: trader.Assets,
+      };
+      this.billItems.push(new BillItem(this.buyTrade, this.sellTrade));
+      this.recording = false;
+    }
   }
 }
 
