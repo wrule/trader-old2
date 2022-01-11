@@ -12,6 +12,6 @@ const ma44 = prices.MA(44);
 const trader = new Trader(100, 0.998, 0.998);
 const st = new Cross2Line(trader, ma8, ma44);
 st.Backtesting(frames);
-console.log(trader.Bill.TotalProfitRate);
+// trader.Bill.Log();
+trader.Bill.LogSummary();
 
-trader.Bill.Log();

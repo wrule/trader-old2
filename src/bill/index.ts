@@ -49,6 +49,32 @@ class Bill {
     return endSellFunds - startBuyFunds;
   }
 
+  public get HoldProfit() {
+    const startPrice = this.First?.BuyTrade?.price || 0;
+    const endPrice = this.Last?.SellTrade?.price || 0;
+    return endPrice - startPrice;
+  }
+
+  public get HoldProfitRate() {
+    const startPrice = this.First?.BuyTrade?.price || 0;
+    if (startPrice !== 0) {
+      return this.HoldProfit / startPrice * 100;
+    }
+    return 0;
+  }
+
+  public get IsBetter() {
+    return this.TotalProfitRate > this.HoldProfitRate;
+  }
+
+  public get BetterRate() {
+    return this.TotalProfitRate / this.HoldProfitRate * 100;
+  }
+
+  public get IsProfit() {
+    return this.TotalProfit > 0;
+  }
+
   /**
    * 总盈利率
    */
@@ -91,6 +117,27 @@ class Bill {
       this.billItems.push(new BillItem(this.buyTrade, this.sellTrade));
       this.recording = false;
     }
+  }
+
+  public LogSummary() {
+    console.log(
+      '账单结果',
+      this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
+      '盈利率',
+      `${this.TotalProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
+    );
+    console.log(
+      '持有对比',
+      this.IsBetter ? '胜过'.bgGreen : '不及'.bgRed,
+      '对比指数',
+      `${this.BetterRate.toFixed(4)}%`[this.IsBetter ? 'green' : 'red'],
+    );
+    console.log(
+      '交易次数',
+      this.Length,
+      '胜率',
+      `${this.WinRate.toFixed(4)}%`.yellow,
+    );
   }
 
   public Log() {
