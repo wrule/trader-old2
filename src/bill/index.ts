@@ -9,6 +9,47 @@ class Bill {
   private buyTrade!: ITrade;
   private sellTrade!: ITrade;
 
+  /**
+   * 账单长度（交易次数）
+   */
+  public get Length() {
+    return this.billItems.length;
+  }
+
+  /**
+   * 账单列表
+   */
+  public get BillItems() {
+    return this.billItems.slice(0);
+  }
+
+  /**
+   * 胜率
+   */
+  public get WinRate() {
+    return (this.billItems.filter((item) => item.IsProfit).length / this.Length) * 100;
+  }
+
+  /**
+   * 总盈利
+   */
+  public get TotalProfit() {
+    const startBuyFunds = this.billItems[0]?.BuyTrade?.funds || 0;
+    const endSellFunds = this.billItems[this.billItems.length - 1]?.SellTrade?.funds || 0;
+    return endSellFunds - startBuyFunds;
+  }
+
+  /**
+   * 总盈利率
+   */
+  public get TotalProfitRate() {
+    const startBuyFunds = this.billItems[0]?.BuyTrade?.funds || 0;
+    if (startBuyFunds !== 0) {
+      return this.TotalProfit / startBuyFunds * 100; 
+    }
+    return 0;
+  }
+
   private recording = false;
 
   public RecordBuy(
