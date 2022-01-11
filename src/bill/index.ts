@@ -1,16 +1,37 @@
+import { IFrame } from "../frame";
+import { Trader } from "../trader";
 
 export
 class Bill {
   public constructor() { }
 
   private billItems: BillItem[] = [];
+  private buyTrade!: ITrade;
+  private sellTrade!: ITrade;
 
-  public Buy() {
-
+  public RecordBuy(
+    frame: IFrame,
+    trader: Trader,
+  ) {
+    this.buyTrade = {
+      time: frame.time,
+      price: frame.price,
+      funds: trader.Funds,
+      assets: trader.Assets,
+    };
   }
 
-  public Sell() {
-
+  public RecordSell(
+    frame: IFrame,
+    trader: Trader,
+  ) {
+    this.sellTrade = {
+      time: frame.time,
+      price: frame.price,
+      funds: trader.Funds,
+      assets: trader.Assets,
+    };
+    this.billItems.push(new BillItem(this.buyTrade, this.sellTrade));
   }
 }
 
