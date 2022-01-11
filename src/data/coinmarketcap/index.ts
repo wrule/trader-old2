@@ -8,7 +8,6 @@ function Load(data: any): IFrame[] {
       time: Number(key) * 1000,
       price: ((value as any)?.v || [])[0] as number,
     }));
-  console.log(points.length);
   const result: IFrame[] = [];
   points.forEach((item, index) => {
     if (item.time == null || isNaN(item.time)) {

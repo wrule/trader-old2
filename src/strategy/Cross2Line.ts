@@ -8,8 +8,8 @@ class Cross2Line
 extends Strategy {
   public constructor(
     trader: Trader,
-    private slowLine: Nums,
     private fastLine: Nums,
+    private slowLine: Nums,
   ) {
     super(trader);
   }

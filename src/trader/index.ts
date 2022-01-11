@@ -5,8 +5,8 @@ export
 class Trader {
   public constructor(
     private initFunds = 1,
-    private buyFee = 0.999,
-    private sellFee = 0.999,
+    private buyFee = 0.998,
+    private sellFee = 0.998,
   ) {
     this.funds = this.initFunds;
   }
@@ -22,6 +22,10 @@ class Trader {
 
   public get Assets() {
     return this.assets;
+  }
+
+  public get Bill() {
+    return this.bill;
   }
 
   /**
