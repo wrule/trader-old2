@@ -3,6 +3,9 @@ import { IFrame } from "../frame";
 import { Trader } from "../trader";
 import 'colors';
 
+/**
+ * 账单类
+ */
 export
 class Bill {
   public constructor(
@@ -18,7 +21,7 @@ class Bill {
   }
 
   /**
-   * 账单长度（交易次数）
+   * 交易次数（账单长度）
    */
   public get Length() {
     return this.billItems.length;
@@ -31,19 +34,39 @@ class Bill {
     return this.billItems.slice(0);
   }
 
+  /**
+   * 第一个账目
+   */
   public get First() {
     return this.billItems[0];
   }
 
+  /**
+   * 最后一个账目
+   */
   public get Last() {
     return this.billItems[this.billItems.length - 1];
+  }
+
+  /**
+   * 盈利次数
+   */
+  public get ProfitNum() {
+    return this.billItems.filter((item) => item.IsProfit).length;
+  }
+
+  /**
+   * 亏损次数
+   */
+  public get LossNum() {
+    return this.billItems.filter((item) => !item.IsProfit).length;
   }
 
   /**
    * 胜率
    */
   public get WinRate() {
-    return (this.billItems.filter((item) => item.IsProfit).length / this.Length) * 100;
+    return this.ProfitNum / (this.Length || 1) * 100;
   }
 
   /**
