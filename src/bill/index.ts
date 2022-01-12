@@ -164,6 +164,7 @@ class Bill {
   }
 }
 
+export
 class BillItem {
   public constructor(
     private buyTrade: ITrade,
@@ -216,6 +217,7 @@ class BillItem {
   }
 }
 
+export
 interface ITrade {
   time: number;
   price: number;
