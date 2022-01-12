@@ -214,17 +214,31 @@ class BillItem {
     return (this.Profit / (this.buyTrade.funds || 1)) * 100;
   }
 
+  /**
+   * 持仓天数
+   */
+  public get HoldingDays() {
+    const startTime = moment(this.buyTrade.time);
+    const endTime = moment(this.sellTrade.time);
+    return endTime.diff(startTime, 'day', true);
+  }
+
+  /**
+   * 输出账目信息
+   */
   public Log() {
     console.log(
       '交易结果',
       this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
       '盈利率',
-      `${this.ProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
+      `${this.IsProfit ? '+' : ''}${this.ProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
+      '持仓天数',
+      this.HoldingDays.toFixed(4).yellow,
     );
     console.log(
       `[${moment(this.buyTrade.time).format('YYYY-MM-DD HH:mm:ss')}]`,
       '买入'.bgGreen,
-      '放出资金',
+      '使用资金',
       this.buyTrade.funds.toFixed(4).yellow,
       '买入资产',
       this.buyTrade.assets.toFixed(4).yellow,

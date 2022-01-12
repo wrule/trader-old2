@@ -11,14 +11,8 @@ import { BreakZero } from './strategy/BreakZero';
 const trader = new Trader(100, 0.998, 0.998);
 const frames = Load(BTCData);
 const prices = nums(frames.map((frame) => frame.price));
-const lines: Nums[] = [];
-
-for (let fast = 1; fast < 200; ++fast) {
-  console.log(fast);
-  for (let slow = fast + 1; slow <= 200; ++slow) {
-    for (let size = 1; size <= 200; ++size) {
-      const { MACD } = prices.MACD(fast, slow, size);
-      lines.push(MACD);
-    }
-  }
-}
+const fastLine = prices.MA(8);
+const slowLine = prices.MA(44);
+const strategy = new Cross2Line(trader, fastLine, slowLine);
+const bill = strategy.Backtesting(frames);
+bill.First.Log();
