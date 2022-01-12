@@ -14,7 +14,7 @@ extends Strategy {
     super(trader);
   }
 
-  protected Watch(frame: IFrame, index: number): void {
+  protected watch(frame: IFrame, index: number): void {
     if (index > 0) {
       const fast = this.fastLine.Nums[index];
       const slow = this.slowLine.Nums[index];
