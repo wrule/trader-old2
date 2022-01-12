@@ -12,17 +12,23 @@ class Cross2LineFinder {
     private lines: Nums[],
   ) { }
 
-  public Find(filter: (bill: Bill) => boolean) {
+  public Find(
+    filter: (bill: Bill) => boolean = (bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 50,
+    sorter: (bill1: Bill, bill2: Bill) => number = () => 0,
+    limit: number = 100,
+  ) {
     const result: Bill[] = [];
     for (let fastIndex = 0; fastIndex < this.lines.length - 1; ++fastIndex) {
       for (let slowIndex = fastIndex + 1; slowIndex < this.lines.length; ++slowIndex) {
         const strategy = new Cross2Line(this.trader, this.lines[fastIndex], this.lines[slowIndex]);
-        strategy.Backtesting(this.frames);
-        if (filter(this.trader.Bill)) {
-          result.push(this.trader.Bill);
+        const bill = strategy.Backtesting(this.frames);
+        bill.SetId(`${fastIndex}-${slowIndex}`);
+        if (filter(bill)) {
+          result.push(bill);
         }
       }
     }
-    return result;
+    result.sort(sorter);
+    return result.slice(0, limit);
   }
 }

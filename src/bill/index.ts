@@ -5,11 +5,17 @@ import 'colors';
 
 export
 class Bill {
-  public constructor() { }
+  public constructor(
+    private id = '',
+  ) { }
 
   private billItems: BillItem[] = [];
   private buyTrade!: ITrade;
   private sellTrade!: ITrade;
+
+  public get Id() {
+    return this.id;
+  }
 
   /**
    * 账单长度（交易次数）
@@ -87,6 +93,10 @@ class Bill {
   }
 
   private recording = false;
+
+  public SetId(id: string) {
+    this.id = id;
+  }
 
   public RecordBuy(
     frame: IFrame,

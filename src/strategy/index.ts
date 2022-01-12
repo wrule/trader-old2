@@ -47,6 +47,7 @@ abstract class Strategy {
    */
   public Backtesting(frames: IFrame[]) {
     this.frames = frames;
+    this.trader.Reset();
     this.frames.forEach((frame, index) => {
       this.index = index;
       this.watch(frame, index);
@@ -54,5 +55,6 @@ abstract class Strategy {
         this.Trader.Sell(frame);
       }
     });
+    return this.trader.Bill;
   }
 }
