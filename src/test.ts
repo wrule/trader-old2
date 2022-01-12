@@ -12,11 +12,7 @@ const prices = nums(frames.map((frame) => frame.price));
 const lines = Array(200).fill(0).map((item, index) => prices.MA(index));
 const trader = new Trader(100, 0.998, 0.998);
 const finder = new Cross2LineFinder(trader, frames, lines);
-const k = finder.Find(
-  (bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 50,
-  (bill1: Bill, bill2: Bill) => bill2.TotalProfitRate - bill1.TotalProfitRate,
-  10,
-);
+const k = finder.Find();
 console.log(k.map((item) => [item.Id, item.TotalProfitRate, item.WinRate]));
 
 

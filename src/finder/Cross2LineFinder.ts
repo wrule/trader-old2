@@ -13,22 +13,27 @@ class Cross2LineFinder {
   ) { }
 
   public Find(
-    filter: (bill: Bill) => boolean = (bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 50,
-    sorter: (bill1: Bill, bill2: Bill) => number = () => 0,
-    limit: number = 100,
+    config: {
+      filter: (bill: Bill) => boolean,
+      sorter: (bill1: Bill, bill2: Bill) => number,
+      limit: number,
+    } = { } as any,
   ) {
+    config.filter = config.filter || ((bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 50);
+    config.sorter = config.sorter || ((bill1: Bill, bill2: Bill) => bill2.TotalProfitRate - bill1.TotalProfitRate);
+    config.limit = config.limit || 20;
     const result: Bill[] = [];
     for (let fastIndex = 0; fastIndex < this.lines.length - 1; ++fastIndex) {
       for (let slowIndex = fastIndex + 1; slowIndex < this.lines.length; ++slowIndex) {
         const strategy = new Cross2Line(this.trader, this.lines[fastIndex], this.lines[slowIndex]);
         const bill = strategy.Backtesting(this.frames);
         bill.SetId(`${fastIndex}-${slowIndex}`);
-        if (filter(bill)) {
+        if (config.filter(bill)) {
           result.push(bill);
         }
       }
     }
-    result.sort(sorter);
-    return result.slice(0, limit);
+    result.sort(config.sorter);
+    return result.slice(0, config.limit);
   }
 }
