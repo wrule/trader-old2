@@ -164,31 +164,54 @@ class Bill {
   }
 }
 
+/**
+ * 账目类
+ */
 export
 class BillItem {
+  /**
+   * 构造函数
+   * @param buyTrade 买入交易
+   * @param sellTrade 卖出交易
+   */
   public constructor(
     private buyTrade: ITrade,
     private sellTrade: ITrade,
   ) { }
 
+  /**
+   * 买入交易
+   */
   public get BuyTrade(): ITrade {
     return { ...this.buyTrade };
   }
 
+  /**
+   * 卖出交易
+   */
   public get SellTrade(): ITrade {
     return { ...this.sellTrade };
   }
 
+  /**
+   * 账目是否盈利
+   */
   public get IsProfit() {
     return this.sellTrade.funds > this.buyTrade.funds;
   }
 
+  /**
+   * 账目盈利数额
+   */
   public get Profit() {
     return this.sellTrade.funds - this.buyTrade.funds;
   }
 
+  /**
+   * 账目盈利率（百分比）
+   */
   public get ProfitRate() {
-    return (this.Profit / this.buyTrade.funds) * 100;
+    return (this.Profit / (this.buyTrade.funds || 1)) * 100;
   }
 
   public Log() {
@@ -217,6 +240,9 @@ class BillItem {
   }
 }
 
+/**
+ * 交易结构
+ */
 export
 interface ITrade {
   time: number;
