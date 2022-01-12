@@ -1,4 +1,4 @@
-import BTCData from './data/coinmarketcap/dent.json';
+import BTCData from './data/coinmarketcap/eth.json';
 import { Load } from './data/coinmarketcap';
 import moment, { normalizeUnits } from 'moment';
 import { nums } from '@wrule/nums';
