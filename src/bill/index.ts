@@ -237,7 +237,7 @@ class BillItem {
     );
     console.log(
       `[${moment(this.buyTrade.time).format('YYYY-MM-DD HH:mm:ss')}]`,
-      '买入'.bgGreen,
+      '买入'.bgCyan,
       '使用资金',
       this.buyTrade.funds.toFixed(4).yellow,
       '买入资产',
