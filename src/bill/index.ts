@@ -78,6 +78,14 @@ class Bill {
     return endSellFunds - startBuyFunds;
   }
 
+  /**
+   * 总盈利率
+   */
+  public get TotalProfitRate() {
+    const startBuyFunds = this.billItems[0]?.BuyTrade?.funds || 0;
+    return this.TotalProfit / (startBuyFunds || 1) * 100;
+  }
+
   public get HoldProfit() {
     const startPrice = this.First?.BuyTrade?.price || 0;
     const endPrice = this.Last?.SellTrade?.price || 0;
@@ -102,17 +110,6 @@ class Bill {
 
   public get IsProfit() {
     return this.TotalProfit > 0;
-  }
-
-  /**
-   * 总盈利率
-   */
-  public get TotalProfitRate() {
-    const startBuyFunds = this.billItems[0]?.BuyTrade?.funds || 0;
-    if (startBuyFunds !== 0) {
-      return this.TotalProfit / startBuyFunds * 100; 
-    }
-    return 0;
   }
 
   private recording = false;
