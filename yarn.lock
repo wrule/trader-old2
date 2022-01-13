@@ -14,16 +14,16 @@
   dependencies:
     "@types/node" "*"
 
-"@wrule/nums@^0.2.0":
-  version "0.2.0"
-  resolved "http://npm.perfma-inc.net:80/@wrule%2fnums/-/nums-0.2.0.tgz#d7e6d3a56dbceedb52ec278b86c97fde87ce1178"
-  integrity sha512-U9Bx9RGFyi6Zc1pExhqaoLg2HrgmhjB+SOVxYcvtEbx8KXCPxdIlfXe0C8bIqW2rcPaxzaUMSncA9HGQOIdyrg==
+"@wrule/nums@^0.2.1":
+  version "0.2.1"
+  resolved "http://npm.perfma-inc.net:80/@wrule%2fnums/-/nums-0.2.1.tgz#36465a82656bd303bb70021e804f7541f0416dbf"
+  integrity sha512-c/hKA6zNTF28ihQnT48EqzywWbGJPLOOVYRVuJjdCVll5wtbo3faKVhYmkw5JpwmpgSQD3SKydkHz0y0n0QDMA==
   dependencies:
     "@types/node" "^17.0.5"
     "@types/papaparse" "^5.3.1"
     papaparse "^5.3.1"
 
-colors@^1.4.2:
+colors@^1.4.0:
   version "1.4.0"
   resolved "http://npm.perfma-inc.net:80/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
   integrity sha1-xQSRR51MG9rtLJztMs98fcI2D3g=

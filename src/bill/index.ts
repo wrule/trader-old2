@@ -2,6 +2,7 @@ import moment from "moment";
 import { IFrame } from "../frame";
 import { Trader } from "../trader";
 import 'colors';
+import { nums } from "@wrule/nums";
 
 /**
  * 账单类
@@ -143,6 +144,39 @@ class Bill {
     return this.TotalProfitRate - this.HoldProfitRate;
   }
 
+  public get ProfitStats() {
+    const profitNums = nums(this.billItems.map((item) => item.Profit));
+    return {
+      min: profitNums.min(),
+      avg: profitNums.avg(),
+      max: profitNums.max(),
+      var: profitNums.variance(),
+      std: profitNums.standardDeviation(),
+    };
+  }
+
+  public get ProfitRateStats() {
+    const profitRateNums = nums(this.billItems.map((item) => item.ProfitRate));
+    return {
+      min: profitRateNums.min(),
+      avg: profitRateNums.avg(),
+      max: profitRateNums.max(),
+      var: profitRateNums.variance(),
+      std: profitRateNums.standardDeviation(),
+    };
+  }
+
+  public get HoldingDaysStats() {
+    const holdingDaysNums = nums(this.billItems.map((item) => item.HoldingDays));
+    return {
+      min: holdingDaysNums.min(),
+      avg: holdingDaysNums.avg(),
+      max: holdingDaysNums.max(),
+      var: holdingDaysNums.variance(),
+      std: holdingDaysNums.standardDeviation(),
+    };
+  }
+
   private recording = false;
 
   public SetId(id: string) {
@@ -222,6 +256,10 @@ class Bill {
     // 连续最大亏损 次数 总亏损 最小 平均 最大 方差 标准差
     // 连续最大盈利 次数 总盈利 最小 平均 最大 方差 标准差
     // 年化 月化 日化 收益
+  }
+
+  public LogSummary() {
+
   }
 
   public Log() {
