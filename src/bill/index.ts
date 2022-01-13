@@ -115,10 +115,16 @@ class Bill {
     return this.HoldProfit / (this.StartFunds || 1) * 100;
   }
 
+  /**
+   * 账单盈利是否高于持有盈利
+   */
   public get IsBetter() {
-    return this.TotalProfitRate > this.HoldProfitRate;
+    return this.TotalProfit > this.HoldProfit;
   }
 
+  /**
+   * 账单盈利率优于持有盈利率系数
+   */
   public get BetterRate() {
     return this.TotalProfitRate / this.HoldProfitRate * 100;
   }
