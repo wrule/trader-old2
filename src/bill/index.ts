@@ -221,6 +221,7 @@ class Bill {
   }
 
   public Log() {
+    this.LogSummary();
     this.billItems.forEach((item) => {
       console.log();
       item.Log();
