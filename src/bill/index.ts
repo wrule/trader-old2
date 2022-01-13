@@ -21,6 +21,13 @@ class Bill {
   }
 
   /**
+   * 是否盈利
+   */
+  public get IsProfit() {
+    return this.TotalProfit > 0;
+  }
+
+  /**
    * 交易次数（账单长度）
    */
   public get Length() {
@@ -123,14 +130,10 @@ class Bill {
   }
 
   /**
-   * 账单盈利率优于持有盈利率系数
+   * 账单盈利率优于持有盈利率的百分点
    */
-  public get BetterRate() {
-    return this.TotalProfitRate / this.HoldProfitRate * 100;
-  }
-
-  public get IsProfit() {
-    return this.TotalProfit > 0;
+  public get BetterRateDiff() {
+    return this.TotalProfitRate - this.HoldProfitRate;
   }
 
   private recording = false;
