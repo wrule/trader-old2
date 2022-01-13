@@ -101,14 +101,18 @@ class Bill {
    * 持有盈利
    */
   public get HoldProfit() {
-    return 0;
+    const startBuyAssets = this.First?.BuyTrade?.assets || 0;
+    const endSellAssets = this.Last?.SellTrade?.assets || 0;
+    const endSellFunds = this.Last?.SellTrade?.funds || 0;
+    const holdSellFunds = startBuyAssets / (endSellAssets / endSellFunds);
+    return holdSellFunds - this.StartFunds;
   }
 
   /**
    * 持有盈利率
    */
   public get HoldProfitRate() {
-    return 0;
+    return this.HoldProfit / (this.StartFunds || 1) * 100;
   }
 
   public get IsBetter() {
