@@ -183,7 +183,11 @@ class Bill {
   public LogSummary() {
     console.log(
       '账单Id',
-      this.Id.yellow,
+      this.Id.bgBlue,
+      '初始资金',
+      this.StartFunds.toFixed(4).yellow,
+      '结束资金',
+      this.EndFunds.toFixed(4).yellow,
     );
     console.log(
       '交易次数',
