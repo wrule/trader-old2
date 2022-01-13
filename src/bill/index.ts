@@ -190,8 +190,8 @@ class Bill {
     console.log(
       '持有对比',
       this.IsBetter ? '胜过'.bgGreen : '不及'.bgRed,
-      '对比指数',
-      `${this.BetterRate.toFixed(4)}%`[this.IsBetter ? 'green' : 'red'],
+      '百分点差',
+      `${this.BetterRateDiff.toFixed(4)}%`[this.IsBetter ? 'green' : 'red'],
     );
     // 单次 最小 平均 最大 盈利
     // 单次 最小 平均 最大 亏损
