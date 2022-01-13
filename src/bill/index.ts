@@ -116,6 +116,13 @@ class Bill {
   }
 
   /**
+   * 持有是否盈利
+   */
+  public get IsHoldProfit() {
+    return this.HoldProfit > 0;
+  }
+
+  /**
    * 持有盈利率
    */
   public get HoldProfitRate() {
@@ -191,14 +198,20 @@ class Bill {
     console.log(
       '账单结果',
       this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
+      '盈利',
+      `${this.IsProfit ? '+' : ''}${this.TotalProfit.toFixed(4)}`[this.IsProfit ? 'green' : 'red'],
       '盈利率',
-      `${this.TotalProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
+      `${this.IsProfit ? '+' : ''}${this.TotalProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
     );
     console.log(
       '持有对比',
       this.IsBetter ? '胜过'.bgGreen : '不及'.bgRed,
+      '持有盈利',
+      `${this.IsHoldProfit ? '+' : ''}${this.HoldProfit.toFixed(4)}`[this.IsHoldProfit ? 'green' : 'red'],
+      '持有盈利率',
+      `${this.IsHoldProfit ? '+' : ''}${this.HoldProfitRate.toFixed(4)}%`[this.IsHoldProfit ? 'green' : 'red'],
       '百分点差',
-      `${this.BetterRateDiff.toFixed(4)}%`[this.IsBetter ? 'green' : 'red'],
+      `${this.IsBetter ? '+' : ''}${this.BetterRateDiff.toFixed(4)}%`[this.IsBetter ? 'green' : 'red'],
     );
     // 单次 最小 平均 最大 方差 标准差 盈利
     // 单次 最小 平均 最大 方差 标准差 亏损
