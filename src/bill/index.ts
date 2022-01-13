@@ -70,33 +70,44 @@ class Bill {
   }
 
   /**
+   * 初始资金
+   */
+  public get StartFunds() {
+    return this.First?.BuyTrade?.funds || 0;
+  }
+
+  /**
+   * 结束资金
+   */
+  public get EndFunds() {
+    return this.Last?.SellTrade?.funds || 0;
+  }
+
+  /**
    * 总盈利
    */
   public get TotalProfit() {
-    const startBuyFunds = this.billItems[0]?.BuyTrade?.funds || 0;
-    const endSellFunds = this.billItems[this.billItems.length - 1]?.SellTrade?.funds || 0;
-    return endSellFunds - startBuyFunds;
+    return this.EndFunds - this.StartFunds;
   }
 
   /**
    * 总盈利率
    */
   public get TotalProfitRate() {
-    const startBuyFunds = this.billItems[0]?.BuyTrade?.funds || 0;
-    return this.TotalProfit / (startBuyFunds || 1) * 100;
+    return this.TotalProfit / (this.StartFunds || 1) * 100;
   }
 
+  /**
+   * 持有盈利
+   */
   public get HoldProfit() {
-    const startPrice = this.First?.BuyTrade?.price || 0;
-    const endPrice = this.Last?.SellTrade?.price || 0;
-    return endPrice - startPrice;
+    return 0;
   }
 
+  /**
+   * 持有盈利率
+   */
   public get HoldProfitRate() {
-    const startPrice = this.First?.BuyTrade?.price || 0;
-    if (startPrice !== 0) {
-      return this.HoldProfit / startPrice * 100;
-    }
     return 0;
   }
 
