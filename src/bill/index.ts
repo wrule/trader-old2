@@ -104,7 +104,7 @@ class Bill {
     const startBuyAssets = this.First?.BuyTrade?.assets || 0;
     const endSellAssets = this.Last?.SellTrade?.assets || 0;
     const endSellFunds = this.Last?.SellTrade?.funds || 0;
-    const holdSellFunds = startBuyAssets / (endSellAssets / endSellFunds);
+    const holdSellFunds = startBuyAssets * (endSellFunds / (endSellAssets || 1));
     return holdSellFunds - this.StartFunds;
   }
 
