@@ -175,6 +175,10 @@ class Bill {
 
   public LogSummary() {
     console.log(
+      '账单Id',
+      this.Id.yellow,
+    );
+    console.log(
       '交易次数',
       this.Length,
       '胜率',

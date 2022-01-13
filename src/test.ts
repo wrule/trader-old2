@@ -15,4 +15,5 @@ const fastLine = prices.MA(8);
 const slowLine = prices.MA(44);
 const strategy = new Cross2Line(trader, fastLine, slowLine);
 const bill = strategy.Backtesting(frames);
+bill.SetId('鸡毛策略');
 bill.LogSummary();
