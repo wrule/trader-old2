@@ -236,16 +236,16 @@ class Bill {
   }
 
   /**
-   * 获取连续盈利账单
+   * 获取盈利子账单
    */
-  public SerialProfitBills() {
+  public ProfitSubBills() {
 
   }
 
   /**
-   * 获取连续亏损账单
+   * 获取亏损子账单
    */
-  public SerialLossBills() {
+  public LossSubBills() {
 
   }
 
