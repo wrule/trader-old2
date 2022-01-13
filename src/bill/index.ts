@@ -71,6 +71,10 @@ class Bill {
     return new Bill(this.billItems.filter((item) => !item.IsProfit), this.id + '-loss_items');
   }
 
+  public Slice(start?: number, end?: number) {
+    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end}_items`);
+  }
+
   /**
    * 亏损次数
    */
@@ -293,6 +297,7 @@ class Bill {
   }
 
   public LogX() {
+    this.LogSummary();
     this.ProfitBill.LogSummary();
     this.LossBill.LogSummary();
   }
