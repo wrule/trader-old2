@@ -36,9 +36,9 @@ class Bill {
   }
 
   /**
-   * 持仓天数
+   * 交易天数
    */
-  public get HodingDays() {
+  public get TradingDays() {
     const startTime = moment(this.First?.BuyTrade.time || 0);
     const endTime = moment(this.Last?.SellTrade.time || 0);
     return endTime.diff(startTime, 'day', true);
