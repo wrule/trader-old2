@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { ITrade } from './trade';
+import { niceProfit, niceProfitRate } from './utils';
 
 /**
  * 账目类
@@ -68,25 +69,31 @@ class BillItem {
       '交易结果',
       this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
       '盈利率',
-      `${this.IsProfit ? '+' : ''}${this.ProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
+      niceProfitRate(this.ProfitRate),
+      '盈利',
+      niceProfit(this.Profit),
       '持仓天数',
       this.HoldingDays.toFixed(4).yellow,
     );
     console.log(
       `[${moment(this.buyTrade.time).format('YYYY-MM-DD HH:mm:ss')}]`,
       '买入'.bgCyan,
-      '使用资金',
+      '投入资金',
       this.buyTrade.funds.toFixed(4).yellow,
       '买入资产',
       this.buyTrade.assets.toFixed(4).yellow,
+      '市场价格',
+      this.buyTrade.price.toFixed(4).yellow,
     );
     console.log(
       `[${moment(this.sellTrade.time).format('YYYY-MM-DD HH:mm:ss')}]`,
       '卖出'.bgBlue,
-      '卖出资产',
-      this.sellTrade.assets.toFixed(4).yellow,
       '收回资金',
       this.sellTrade.funds.toFixed(4).yellow,
+      '卖出资产',
+      this.sellTrade.assets.toFixed(4).yellow,
+      '市场价格',
+      this.sellTrade.price.toFixed(4).yellow,
     );
   }
 }
