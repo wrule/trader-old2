@@ -144,6 +144,9 @@ class Bill {
     return this.TotalProfitRate - this.HoldProfitRate;
   }
 
+  /**
+   * 盈利统计
+   */
   public get ProfitStats() {
     const profitNums = nums(this.billItems.map((item) => item.Profit));
     return {
@@ -155,6 +158,9 @@ class Bill {
     };
   }
 
+  /**
+   * 盈利率统计
+   */
   public get ProfitRateStats() {
     const profitRateNums = nums(this.billItems.map((item) => item.ProfitRate));
     return {
@@ -166,6 +172,9 @@ class Bill {
     };
   }
 
+  /**
+   * 持仓天数统计
+   */
   public get HoldingDaysStats() {
     const holdingDaysNums = nums(this.billItems.map((item) => item.HoldingDays));
     return {
