@@ -9,10 +9,10 @@ import 'colors';
 export
 class Bill {
   public constructor(
+    private billItems: BillItem[] = [],
     private id = '',
   ) { }
 
-  private billItems: BillItem[] = [];
   private buyTrade!: ITrade;
   private sellTrade!: ITrade;
 
