@@ -235,6 +235,20 @@ class Bill {
     }
   }
 
+  /**
+   * 获取连续盈利账单
+   */
+  public SerialProfitBills() {
+
+  }
+
+  /**
+   * 获取连续亏损账单
+   */
+  public SerialLossBills() {
+
+  }
+
   public LogMeta() {
     console.log(
       '账单Id',
