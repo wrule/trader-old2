@@ -77,6 +77,24 @@ class Trader {
   }
 
   /**
+   * 做空
+   * @param frame 帧
+   */
+  public Short(frame: IFrame) {
+    if (!this.Holding) {
+
+    }
+  }
+
+  /**
+   * 做空平仓
+   * @param frame 帧
+   */
+  public CloseShort(frame: IFrame) {
+
+  }
+
+  /**
    * 重置交易者
    */
   public Reset() {
