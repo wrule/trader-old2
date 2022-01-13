@@ -36,6 +36,15 @@ class Bill {
   }
 
   /**
+   * 持仓天数
+   */
+  public get HodingDays() {
+    const startTime = moment(this.First?.BuyTrade.time || 0);
+    const endTime = moment(this.Last?.SellTrade.time || 0);
+    return endTime.diff(startTime, 'day', true);
+  }
+
+  /**
    * 账单列表
    */
   public get BillItems() {
@@ -71,8 +80,8 @@ class Bill {
     return new Bill(this.billItems.filter((item) => !item.IsProfit), this.id + '-loss_items');
   }
 
-  public Slice(start?: number, end?: number) {
-    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end}_items`);
+  public Slice(start: number, end: number) {
+    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
   }
 
   /**
@@ -236,17 +245,52 @@ class Bill {
   }
 
   /**
+   * 获取子账单
+   */
+  public SubBills() {
+    const result: Bill[] = [];
+    let start = 0;
+    for (let index = 1; index <= this.billItems.length; ++index) {
+      const item = this.billItems[index];
+      const prevItem = this.billItems[index - 1];
+      if (index === this.billItems.length || item.IsProfit !== prevItem.IsProfit) {
+        result.push(this.Slice(start, index));
+        start = index;
+      }
+    }
+    return result;
+  }
+
+  /**
    * 获取盈利子账单
+   * @returns 盈利子账单
    */
   public ProfitSubBills() {
-
+    return this.SubBills().filter((bill) => bill.IsProfit);
   }
 
   /**
    * 获取亏损子账单
+   * @returns 亏损子账单
    */
   public LossSubBills() {
+    return this.SubBills().filter((bill) => !bill.IsProfit);
+  }
 
+  /**
+   * 获取连续盈利子账单
+   * @returns 连续盈利子账单
+   */
+  public SerialProfitSubBills() {
+    return this.ProfitSubBills().filter((bill) => bill.Length > 1);
+  }
+
+  /**
+   * 获取连续亏损子账单
+   * @returns 连续亏损子账单
+   */
+  public SerialLossSubBills() {
+    return this.LossSubBills().filter((bill) => bill.Length > 1);
   }
 
   public LogMeta() {
@@ -296,6 +340,11 @@ class Bill {
   public LogSummary() {
     console.log(
       this.Id.bgBlue,
+      '总盈利',
+      this.TotalProfitRate.toFixed(4).concat('%').yellow,
+      '交易次数',
+      this.Length,
+      '持仓天数',
       '单次盈利率',
       '最小',
       this.ProfitRateStats.min.toFixed(4).concat('%').yellow,
@@ -305,8 +354,6 @@ class Bill {
       this.ProfitRateStats.max.toFixed(4).concat('%').yellow,
       '标准差',
       this.ProfitRateStats.std.toFixed(4).concat('%').yellow,
-      '方差',
-      this.ProfitRateStats.var.toFixed(4).concat('%').yellow,
     );
   }
 
