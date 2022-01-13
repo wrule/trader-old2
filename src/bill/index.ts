@@ -1,8 +1,9 @@
-import moment from "moment";
-import { IFrame } from "../frame";
-import { Trader } from "../trader";
+import moment from 'moment';
+import { IFrame } from '../frame';
+import { Trader } from '../trader';
 import 'colors';
-import { nums } from "@wrule/nums";
+import { nums } from '@wrule/nums';
+import { ITrade } from './trade';
 
 /**
  * 账单类
@@ -460,15 +461,4 @@ class BillItem {
       this.sellTrade.funds.toFixed(4).yellow,
     );
   }
-}
-
-/**
- * 交易结构
- */
-export
-interface ITrade {
-  time: number;
-  price: number;
-  funds: number;
-  assets: number;
 }
