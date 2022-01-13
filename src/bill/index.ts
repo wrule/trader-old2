@@ -180,7 +180,7 @@ class Bill {
     }
   }
 
-  public LogSummary() {
+  public LogMeta() {
     console.log(
       '账单Id',
       this.Id.bgBlue,
@@ -225,7 +225,7 @@ class Bill {
   }
 
   public Log() {
-    this.LogSummary();
+    this.LogMeta();
     this.billItems.forEach((item) => {
       console.log();
       item.Log();
