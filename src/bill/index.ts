@@ -63,6 +63,14 @@ class Bill {
     return this.billItems.filter((item) => item.IsProfit).length;
   }
 
+  public get ProfitBill() {
+    return new Bill(this.billItems.filter((item) => item.IsProfit), this.id + '-profit_items');
+  }
+
+  public get LossBill() {
+    return new Bill(this.billItems.filter((item) => !item.IsProfit), this.id + '-loss_items');
+  }
+
   /**
    * 亏损次数
    */
@@ -268,7 +276,25 @@ class Bill {
   }
 
   public LogSummary() {
+    console.log(
+      this.Id.bgBlue,
+      '单次盈利率',
+      '最小',
+      this.ProfitRateStats.min.toFixed(4).concat('%').yellow,
+      '平均',
+      this.ProfitRateStats.avg.toFixed(4).concat('%').yellow,
+      '最大',
+      this.ProfitRateStats.max.toFixed(4).concat('%').yellow,
+      '标准差',
+      this.ProfitRateStats.std.toFixed(4).concat('%').yellow,
+      '方差',
+      this.ProfitRateStats.var.toFixed(4).concat('%').yellow,
+    );
+  }
 
+  public LogX() {
+    this.ProfitBill.LogSummary();
+    this.LossBill.LogSummary();
   }
 
   public Log() {
