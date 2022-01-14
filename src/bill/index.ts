@@ -5,6 +5,7 @@ import 'colors';
 import { nums } from '@wrule/nums';
 import { ITrade } from './trade';
 import { BillItem } from './billItem';
+import { niceProfit, niceProfitRate } from './utils';
 
 /**
  * 账单类
@@ -430,20 +431,42 @@ class Bill {
   public LogSummary() {
     console.log(
       this.Id.bgBlue,
-      '总盈利',
-      this.TotalProfitRate.toFixed(4).concat('%').yellow,
+      '结果',
+      this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
+      '盈利',
+      niceProfit(this.TotalProfit),
+      '盈利率',
+      niceProfitRate(this.TotalProfitRate),
+    );
+    console.log(
+      '持仓天数',
+      this.TradingDays.toFixed(4).yellow,
+      '时间段',
+      `${moment(this.First?.BuyTrade.time).format('YYYY-MM-DD HH:mm:ss')} ~ ${moment(this.Last?.BuyTrade.time).format('YYYY-MM-DD HH:mm:ss')}`.yellow,
       '交易次数',
       this.Length,
-      '持仓天数',
-      '单次盈利率',
+    );
+    console.log(
+      '盈利率统计',
       '最小',
-      this.ProfitRateStats.min.toFixed(4).concat('%').yellow,
+      niceProfitRate(this.ProfitRateStats.min),
       '平均',
-      this.ProfitRateStats.avg.toFixed(4).concat('%').yellow,
+      niceProfitRate(this.ProfitRateStats.avg),
       '最大',
-      this.ProfitRateStats.max.toFixed(4).concat('%').yellow,
+      niceProfitRate(this.ProfitRateStats.max),
       '标准差',
-      this.ProfitRateStats.std.toFixed(4).concat('%').yellow,
+      this.ProfitRateStats.std.toFixed(4).yellow,
+    );
+    console.log(
+      '持仓天数统计',
+      '最小',
+      this.HoldingDaysStats.min.toFixed(4).yellow,
+      '平均',
+      this.HoldingDaysStats.avg.toFixed(4).yellow,
+      '最大',
+      this.HoldingDaysStats.max.toFixed(4).yellow,
+      '标准差',
+      this.HoldingDaysStats.std.toFixed(4).yellow,
     );
   }
 
