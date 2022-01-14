@@ -437,37 +437,35 @@ class Bill {
       niceProfit(this.TotalProfit),
       '盈利率',
       niceProfitRate(this.TotalProfitRate),
-    );
-    console.log(
+      '交易次数',
+      this.Length,
       '持仓天数',
       this.TradingDays.toFixed(4).yellow,
       '时间段',
-      `${moment(this.First?.BuyTrade.time).format('YYYY-MM-DD HH:mm:ss')} ~ ${moment(this.Last?.BuyTrade.time).format('YYYY-MM-DD HH:mm:ss')}`.yellow,
-      '交易次数',
-      this.Length,
+      `${moment(this.First?.BuyTrade.time).format('YYYY-MM-DD HH:mm:ss')} ~ ${moment(this.Last?.SellTrade.time).format('YYYY-MM-DD HH:mm:ss')}`.yellow,
     );
-    console.log(
-      '盈利率统计',
-      '最小',
-      niceProfitRate(this.ProfitRateStats.min),
-      '平均',
-      niceProfitRate(this.ProfitRateStats.avg),
-      '最大',
-      niceProfitRate(this.ProfitRateStats.max),
-      '标准差',
-      this.ProfitRateStats.std.toFixed(4).yellow,
-    );
-    console.log(
-      '持仓天数统计',
-      '最小',
-      this.HoldingDaysStats.min.toFixed(4).yellow,
-      '平均',
-      this.HoldingDaysStats.avg.toFixed(4).yellow,
-      '最大',
-      this.HoldingDaysStats.max.toFixed(4).yellow,
-      '标准差',
-      this.HoldingDaysStats.std.toFixed(4).yellow,
-    );
+    // console.log(
+    //   '盈利率统计',
+    //   '最小',
+    //   niceProfitRate(this.ProfitRateStats.min),
+    //   '平均',
+    //   niceProfitRate(this.ProfitRateStats.avg),
+    //   '最大',
+    //   niceProfitRate(this.ProfitRateStats.max),
+    //   '标准差',
+    //   this.ProfitRateStats.std.toFixed(4).yellow,
+    // );
+    // console.log(
+    //   '持仓天数统计',
+    //   '最小',
+    //   this.HoldingDaysStats.min.toFixed(4).yellow,
+    //   '平均',
+    //   this.HoldingDaysStats.avg.toFixed(4).yellow,
+    //   '最大',
+    //   this.HoldingDaysStats.max.toFixed(4).yellow,
+    //   '标准差',
+    //   this.HoldingDaysStats.std.toFixed(4).yellow,
+    // );
   }
 
   public LogX() {
