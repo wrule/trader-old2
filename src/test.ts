@@ -1,7 +1,6 @@
-import BTCData from './data/coinmarketcap/btc.json';
+import BTCData from './data/coinmarketcap/eth.json';
 import { Load } from './data/coinmarketcap';
 import { nums } from '@wrule/nums';
-import { Cross2Line } from './strategy/Cross2Line';
 import { Trader } from './trader';
 import { Cross2LineFinder } from './finder/Cross2LineFinder';
 import { Bill } from './bill';
@@ -13,7 +12,8 @@ const lines = Array(400).fill(0).map((item, index) => prices.MA(index));
 const finder = new Cross2LineFinder(trader, frames, lines);
 const bills = finder.Find({
   filter: ((bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 40 && bill.Length > 30),
-  sorter: (bill1: Bill, bill2: Bill) => bill2.WinRate - bill1.WinRate,
+  // sorter: (bill1: Bill, bill2: Bill) => bill2.WinRate - bill1.WinRate,
+  limit: 100,
 });
 bills.forEach((bill) => {
   bill.LogSummary();
