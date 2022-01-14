@@ -227,9 +227,7 @@ class Bill {
 
 
 
-  public Slice(start: number, end: number) {
-    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
-  }
+
 
   public SetId(id: string) {
     this.id = id;
@@ -279,6 +277,16 @@ class Bill {
       this.billItems.push(new BillItem(this.buyTrade, this.sellTrade));
       this.recording = false;
     }
+  }
+
+  /**
+   * 截取账单切片
+   * @param start 开始索引
+   * @param end 结束索引
+   * @returns 截取的账单
+   */
+  public Slice(start: number, end: number) {
+    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
   }
 
   /**
