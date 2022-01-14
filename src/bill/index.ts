@@ -220,6 +220,14 @@ class Bill {
   }
 
   /**
+   * 设置账单Id
+   * @param id 账单Id
+   */
+  public SetId(id: string) {
+    this.id = id;
+  }
+
+  /**
    * 交易记录标志
    */
   private recording = false;
@@ -275,20 +283,6 @@ class Bill {
     return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
   }
 
-
-
-
-
-
-
-
-
-  public SetId(id: string) {
-    this.id = id;
-  }
-
-
-
   /**
    * 获取子账单
    */
@@ -337,6 +331,24 @@ class Bill {
   public SerialLossSubBills() {
     return this.LossSubBills().filter((bill) => bill.Length > 1);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   public LogMeta() {
     console.log(
@@ -404,8 +416,8 @@ class Bill {
 
   public LogX() {
     this.LogSummary();
-    this.ProfitBill.LogSummary();
-    this.LossBill.LogSummary();
+    this.ProfitSubBill.LogSummary();
+    this.LossSubBill.LogSummary();
   }
 
   public Log() {
