@@ -428,6 +428,9 @@ class Bill {
     // 年化 月化 日化 收益
   }
 
+  /**
+   * 输出账单概括信息
+   */
   public LogSummary() {
     console.log(
       this.Id.bgBlue,
