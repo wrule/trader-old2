@@ -381,7 +381,7 @@ class Bill {
       niceProfitRate(this.TotalProfitRate),
       '交易次数',
       this.Length,
-      '持仓天数',
+      '交易天数',
       this.TradingDays.toFixed(4).yellow,
       '时间段',
       `${moment(this.First?.BuyTrade.time).format('YYYY-MM-DD HH:mm:ss')} ~ ${moment(this.Last?.SellTrade.time).format('YYYY-MM-DD HH:mm:ss')}`.yellow,
