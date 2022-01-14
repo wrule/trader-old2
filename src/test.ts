@@ -6,7 +6,7 @@ import { MACDFinder } from './finder/MACDFinder';
 const trader = new Trader(100, 0.998, 0.998);
 const frames = Load(BTCData);
 
-const finder = new MACDFinder(trader, frames, 200, 200);
+const finder = new MACDFinder(trader, frames, 100, 50);
 const bills = finder.Find();
 bills.forEach((bill) => {
   bill.LogSummary();
