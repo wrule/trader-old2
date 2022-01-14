@@ -369,65 +369,6 @@ class Bill {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  public LogMeta() {
-    console.log(
-      '账单Id',
-      this.Id.bgBlue,
-      '初始资金',
-      this.StartFunds.toFixed(4).yellow,
-      '结束资金',
-      this.EndFunds.toFixed(4).yellow,
-    );
-    console.log(
-      '交易次数',
-      this.Length,
-      '胜率',
-      `${this.WinRate.toFixed(4)}%`.yellow,
-      '盈利次数',
-      this.ProfitNum.toString().yellow,
-      '亏损次数',
-      this.LossNum.toString().yellow,
-    );
-    console.log(
-      '账单结果',
-      this.IsProfit ? '盈利'.bgGreen : '亏损'.bgRed,
-      '盈利',
-      `${this.IsProfit ? '+' : ''}${this.TotalProfit.toFixed(4)}`[this.IsProfit ? 'green' : 'red'],
-      '盈利率',
-      `${this.IsProfit ? '+' : ''}${this.TotalProfitRate.toFixed(4)}%`[this.IsProfit ? 'green' : 'red'],
-    );
-    console.log(
-      '持有对比',
-      this.IsBetter ? '胜过'.bgGreen : '不及'.bgRed,
-      '持有盈利',
-      `${this.IsHoldProfit ? '+' : ''}${this.HoldProfit.toFixed(4)}`[this.IsHoldProfit ? 'green' : 'red'],
-      '持有盈利率',
-      `${this.IsHoldProfit ? '+' : ''}${this.HoldProfitRate.toFixed(4)}%`[this.IsHoldProfit ? 'green' : 'red'],
-      '百分点差',
-      `${this.IsBetter ? '+' : ''}${this.BetterRateDiff.toFixed(4)}%`[this.IsBetter ? 'green' : 'red'],
-    );
-    // 单次 最小 平均 最大 方差 标准差 盈利
-    // 单次 最小 平均 最大 方差 标准差 亏损
-    // 连续最大亏损 次数 总亏损 最小 平均 最大 方差 标准差
-    // 连续最大盈利 次数 总盈利 最小 平均 最大 方差 标准差
-    // 年化 月化 日化 收益
-  }
-
   /**
    * 输出账单概括信息
    */
@@ -447,38 +388,65 @@ class Bill {
       '时间段',
       `${moment(this.First?.BuyTrade.time).format('YYYY-MM-DD HH:mm:ss')} ~ ${moment(this.Last?.SellTrade.time).format('YYYY-MM-DD HH:mm:ss')}`.yellow,
     );
-    // console.log(
-    //   '盈利率统计',
-    //   '最小',
-    //   niceProfitRate(this.ProfitRateStats.min),
-    //   '平均',
-    //   niceProfitRate(this.ProfitRateStats.avg),
-    //   '最大',
-    //   niceProfitRate(this.ProfitRateStats.max),
-    //   '标准差',
-    //   this.ProfitRateStats.std.toFixed(4).yellow,
-    // );
-    // console.log(
-    //   '持仓天数统计',
-    //   '最小',
-    //   this.HoldingDaysStats.min.toFixed(4).yellow,
-    //   '平均',
-    //   this.HoldingDaysStats.avg.toFixed(4).yellow,
-    //   '最大',
-    //   this.HoldingDaysStats.max.toFixed(4).yellow,
-    //   '标准差',
-    //   this.HoldingDaysStats.std.toFixed(4).yellow,
-    // );
   }
 
-  public LogX() {
+  /**
+   * 输出账单详细信息
+   */
+  public LogDetail() {
     this.LogSummary();
-    this.ProfitSubBill.LogSummary();
-    this.LossSubBill.LogSummary();
+    console.log(
+      '胜率',
+      `${this.WinRate.toFixed(4)}%`.yellow,
+      '初始资金',
+      this.StartFunds.toFixed(4).yellow,
+      '结束资金',
+      this.EndFunds.toFixed(4).yellow,
+      '盈利次数',
+      this.ProfitNum,
+      '亏损次数',
+      this.LossNum,
+    );
+    console.log(
+      '持有对比',
+      this.IsBetter ? '胜过'.bgGreen : '不及'.bgRed,
+      '持有盈利',
+      niceProfit(this.HoldProfit),
+      '持有盈利率',
+      niceProfitRate(this.HoldProfitRate),
+      '百分点差',
+      niceProfitRate(this.BetterRateDiff),
+    );
+    console.log(
+      '盈利率统计',
+      '最小',
+      niceProfitRate(this.ProfitRateStats.min),
+      '平均',
+      niceProfitRate(this.ProfitRateStats.avg),
+      '最大',
+      niceProfitRate(this.ProfitRateStats.max),
+      '标准差',
+      this.ProfitRateStats.std.toFixed(4).yellow,
+    );
+    console.log(
+      '持仓天数统计',
+      '最小',
+      this.HoldingDaysStats.min.toFixed(4).yellow,
+      '平均',
+      this.HoldingDaysStats.avg.toFixed(4).yellow,
+      '最大',
+      this.HoldingDaysStats.max.toFixed(4).yellow,
+      '标准差',
+      this.HoldingDaysStats.std.toFixed(4).yellow,
+    );
+    console.log('最大连续亏损'.bgRed);
+    this.MaxSerialLossSubBill?.LogSummary();
+    console.log('最大连续盈利'.bgGreen);
+    this.MaxSerialProfitSubBill?.LogSummary();
   }
 
-  public Log() {
-    this.LogMeta();
+  public LogAll() {
+    this.LogDetail();
     this.billItems.forEach((item) => {
       console.log();
       item.Log();
