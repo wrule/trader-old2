@@ -19,7 +19,7 @@ class Cross2LineFinder {
       limit: number,
     } = { } as any,
   ) {
-    config.filter = config.filter || ((bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 50);
+    config.filter = config.filter || ((bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 40);
     config.sorter = config.sorter || ((bill1: Bill, bill2: Bill) => bill2.TotalProfitRate - bill1.TotalProfitRate);
     config.limit = config.limit || 20;
     const result: Bill[] = [];

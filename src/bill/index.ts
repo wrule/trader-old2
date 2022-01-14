@@ -381,6 +381,8 @@ class Bill {
       niceProfitRate(this.TotalProfitRate),
       '交易次数',
       this.Length,
+      '胜率',
+      `${this.WinRate.toFixed(4)}%`.yellow,
       '交易天数',
       this.TradingDays.toFixed(4).yellow,
       '时间段',
@@ -394,8 +396,6 @@ class Bill {
   public LogDetail() {
     this.LogSummary();
     console.log(
-      '胜率',
-      `${this.WinRate.toFixed(4)}%`.yellow,
       '初始资金',
       this.StartFunds.toFixed(4).yellow,
       '结束资金',
