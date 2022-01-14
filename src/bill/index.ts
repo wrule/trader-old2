@@ -332,6 +332,26 @@ class Bill {
     return this.LossSubBills().filter((bill) => bill.Length > 1);
   }
 
+  /**
+   * 获取连续盈利子账单（按盈利率排序后）
+   * @returns 连续盈利子账单
+   */
+  public SerialProfitSubBillsSorted() {
+    const result = this.SerialProfitSubBills();
+    result.sort((a, b) => b.TotalProfitRate - a.TotalProfitRate);
+    return result;
+  }
+
+  /**
+   * 获取连续亏损子账单（按亏损率排序后）
+   * @returns 连续亏损子账单
+   */
+  public SerialLossSubBillsSorted() {
+    const result = this.SerialLossSubBills();
+    result.sort((a, b) => a.TotalProfitRate - b.TotalProfitRate);
+    return result;
+  }
+
 
 
 
