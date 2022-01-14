@@ -343,6 +343,13 @@ class Bill {
   }
 
   /**
+   * 最大连续盈利子账单
+   */
+  public get MaxSerialProfitSubBill(): Bill | undefined {
+    return this.SerialProfitSubBillsSorted()[0];
+  }
+
+  /**
    * 获取连续亏损子账单（按亏损率排序后）
    * @returns 连续亏损子账单
    */
@@ -352,6 +359,12 @@ class Bill {
     return result;
   }
 
+  /**
+   * 最大连续亏损子账单
+   */
+  public get MaxSerialLossSubBill(): Bill | undefined {
+    return this.SerialLossSubBillsSorted()[0];
+  }
 
 
 
