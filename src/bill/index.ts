@@ -163,24 +163,6 @@ class Bill {
     return this.HoldProfit / (this.StartFunds || 1) * 100;
   }
 
-
-
-
-
-
-
-
-
-  public Slice(start: number, end: number) {
-    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
-  }
-
-
-
-
-
-
-
   /**
    * 账单盈利是否高于持有盈利
    */
@@ -189,7 +171,7 @@ class Bill {
   }
 
   /**
-   * 账单盈利率优于持有盈利率的百分点
+   * 账单盈利率高于持有盈利率的百分点
    */
   public get BetterRateDiff() {
     return this.TotalProfitRate - this.HoldProfitRate;
@@ -237,12 +219,32 @@ class Bill {
     };
   }
 
-  private recording = false;
+
+
+
+
+
+
+
+
+  public Slice(start: number, end: number) {
+    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
+  }
 
   public SetId(id: string) {
     this.id = id;
   }
 
+  /**
+   * 交易记录标志
+   */
+  private recording = false;
+
+  /**
+   * 记录购买交易
+   * @param frame 帧
+   * @param trader 交易者
+   */
   public RecordBuy(
     frame: IFrame,
     trader: Trader,
@@ -258,6 +260,11 @@ class Bill {
     }
   }
 
+  /**
+   * 记录出售交易
+   * @param frame 帧
+   * @param trader 交易者
+   */
   public RecordSell(
     frame: IFrame,
     trader: Trader,
