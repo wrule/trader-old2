@@ -219,20 +219,6 @@ class Bill {
     };
   }
 
-
-
-
-
-
-
-
-
-
-
-  public SetId(id: string) {
-    this.id = id;
-  }
-
   /**
    * 交易记录标志
    */
@@ -288,6 +274,20 @@ class Bill {
   public Slice(start: number, end: number) {
     return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
   }
+
+
+
+
+
+
+
+
+
+  public SetId(id: string) {
+    this.id = id;
+  }
+
+
 
   /**
    * 获取子账单
