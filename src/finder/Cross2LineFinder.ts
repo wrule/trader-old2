@@ -14,9 +14,9 @@ class Cross2LineFinder {
 
   public Find(
     config: {
-      filter: (bill: Bill) => boolean,
-      sorter: (bill1: Bill, bill2: Bill) => number,
-      limit: number,
+      filter?: (bill: Bill) => boolean,
+      sorter?: (bill1: Bill, bill2: Bill) => number,
+      limit?: number,
     } = { } as any,
   ) {
     config.filter = config.filter || ((bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 40);
