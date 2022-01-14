@@ -11,6 +11,11 @@ import { BillItem } from './billItem';
  */
 export
 class Bill {
+  /**
+   * 构造函数
+   * @param billItems 账目列表
+   * @param id 账单Id
+   */
   public constructor(
     private billItems: BillItem[] = [],
     private id = '',
@@ -19,22 +24,39 @@ class Bill {
   private buyTrade!: ITrade;
   private sellTrade!: ITrade;
 
+  /**
+   * 账目列表
+   */
+  public get BillItems() {
+    return this.billItems.slice(0);
+  }
+
+  /**
+   * 账单Id
+   */
   public get Id() {
     return this.id;
   }
 
   /**
-   * 是否盈利
-   */
-  public get IsProfit() {
-    return this.TotalProfit > 0;
-  }
-
-  /**
-   * 交易次数（账单长度）
+   * 账单长度（交易次数）
    */
   public get Length() {
     return this.billItems.length;
+  }
+
+  /**
+   * 第一个账目
+   */
+  public get First(): BillItem | undefined {
+    return this.billItems[0];
+  }
+
+  /**
+   * 最后一个账目
+   */
+  public get Last(): BillItem | undefined {
+    return this.billItems[this.billItems.length - 1];
   }
 
   /**
@@ -47,43 +69,17 @@ class Bill {
   }
 
   /**
-   * 账单列表
-   */
-  public get BillItems() {
-    return this.billItems.slice(0);
-  }
-
-  /**
-   * 第一个账目
-   */
-  public get First() {
-    return this.billItems[0];
-  }
-
-  /**
-   * 最后一个账目
-   */
-  public get Last() {
-    return this.billItems[this.billItems.length - 1];
-  }
-
-  /**
    * 盈利次数
    */
   public get ProfitNum() {
     return this.billItems.filter((item) => item.IsProfit).length;
   }
 
-  public get ProfitBill() {
+  /**
+   * 盈利子账单
+   */
+  public get ProfitSubBill() {
     return new Bill(this.billItems.filter((item) => item.IsProfit), this.id + '-profit_items');
-  }
-
-  public get LossBill() {
-    return new Bill(this.billItems.filter((item) => !item.IsProfit), this.id + '-loss_items');
-  }
-
-  public Slice(start: number, end: number) {
-    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
   }
 
   /**
@@ -91,6 +87,13 @@ class Bill {
    */
   public get LossNum() {
     return this.billItems.filter((item) => !item.IsProfit).length;
+  }
+
+  /**
+   * 亏损子账单
+   */
+  public get LossSubBill() {
+    return new Bill(this.billItems.filter((item) => !item.IsProfit), this.id + '-loss_items');
   }
 
   /**
@@ -122,10 +125,29 @@ class Bill {
   }
 
   /**
+   * 是否盈利
+   */
+  public get IsProfit() {
+    return this.TotalProfit > 0;
+  }
+
+  /**
    * 总盈利率
    */
   public get TotalProfitRate() {
     return this.TotalProfit / (this.StartFunds || 1) * 100;
+  }
+
+
+
+
+
+
+
+
+
+  public Slice(start: number, end: number) {
+    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
   }
 
   /**
