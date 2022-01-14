@@ -367,8 +367,6 @@ class Bill {
     return this.SerialLossSubBillsSorted()[0];
   }
 
-
-
   /**
    * 输出账单概括信息
    */
@@ -445,6 +443,9 @@ class Bill {
     this.MaxSerialProfitSubBill?.LogSummary();
   }
 
+  /**
+   * 输出账单所有信息
+   */
   public LogAll() {
     this.LogDetail();
     this.billItems.forEach((item) => {
