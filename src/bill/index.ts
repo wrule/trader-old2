@@ -138,18 +138,6 @@ class Bill {
     return this.TotalProfit / (this.StartFunds || 1) * 100;
   }
 
-
-
-
-
-
-
-
-
-  public Slice(start: number, end: number) {
-    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
-  }
-
   /**
    * 持有盈利
    */
@@ -174,6 +162,24 @@ class Bill {
   public get HoldProfitRate() {
     return this.HoldProfit / (this.StartFunds || 1) * 100;
   }
+
+
+
+
+
+
+
+
+
+  public Slice(start: number, end: number) {
+    return new Bill(this.billItems.slice(start, end), `${this.id}-${start}_${end - 1}_items`);
+  }
+
+
+
+
+
+
 
   /**
    * 账单盈利是否高于持有盈利
