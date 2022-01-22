@@ -84,12 +84,21 @@ class Trader {
   private shortFunds = 0;
 
   /**
+   * 是否持有做空资产
+   */
+  public get ShortHolding() {
+    return this.shortAssets > 0;
+  }
+
+  /**
    * 做空
    * @param frame 帧
    */
   public Short(frame: IFrame) {
-    this.shortAssets = this.funds / frame.price;
-    this.shortFunds = this.funds * this.shortFee;
+    if (!this.Holding && !this.ShortHolding) {
+      this.shortAssets = this.funds / frame.price;
+      this.shortFunds = this.funds * this.shortFee;
+    }
   }
 
   /**
@@ -97,10 +106,13 @@ class Trader {
    * @param frame 帧
    */
   public CloseShort(frame: IFrame) {
-    const closeFunds = this.shortAssets * frame.price / this.shortFee;
-    this.shortFunds -= closeFunds;
-    this.funds += this.shortFunds;
-    this.shortAssets = 0;
+    if (this.ShortHolding) {
+      const closeFunds = this.shortAssets * frame.price / this.shortFee;
+      this.shortFunds -= closeFunds;
+      this.funds += this.shortFunds;
+      this.shortFunds = 0;
+      this.shortAssets = 0;
+    }
   }
 
   /**
