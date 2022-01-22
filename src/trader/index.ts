@@ -80,14 +80,17 @@ class Trader {
     }
   }
 
-  private assetDebt = 0;
+  private shortAssets = 0;
+  private shortFunds = 0;
 
   /**
    * 做空
    * @param frame 帧
    */
   public Short(frame: IFrame) {
-
+    this.shortAssets = this.funds / frame.price;
+    this.shortFunds = this.funds;
+    this.funds *= this.shortFee;
   }
 
   /**
@@ -95,7 +98,10 @@ class Trader {
    * @param frame 帧
    */
   public CloseShort(frame: IFrame) {
-
+    const closeFunds = this.shortAssets * frame.price / this.shortFee;
+    this.shortFunds -= closeFunds;
+    this.shortAssets = 0;
+    this.funds += this.shortFunds;
   }
 
   /**
