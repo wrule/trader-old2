@@ -89,8 +89,7 @@ class Trader {
    */
   public Short(frame: IFrame) {
     this.shortAssets = this.funds / frame.price;
-    this.shortFunds = this.funds;
-    this.funds *= this.shortFee;
+    this.shortFunds = this.funds * this.shortFee;
   }
 
   /**
@@ -100,8 +99,8 @@ class Trader {
   public CloseShort(frame: IFrame) {
     const closeFunds = this.shortAssets * frame.price / this.shortFee;
     this.shortFunds -= closeFunds;
-    this.shortAssets = 0;
     this.funds += this.shortFunds;
+    this.shortAssets = 0;
   }
 
   /**
