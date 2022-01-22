@@ -21,7 +21,7 @@ class Cross2LineFinder {
   ) {
     config.filter = config.filter || ((bill: Bill) => bill.IsProfit && bill.IsBetter && bill.WinRate >= 40);
     config.sorter = config.sorter || ((bill1: Bill, bill2: Bill) => bill2.TotalProfitRate - bill1.TotalProfitRate);
-    config.limit = config.limit || 20;
+    config.limit = config.limit || 40;
     const result: Bill[] = [];
     for (let fastIndex = 0; fastIndex < this.lines.length - 1; ++fastIndex) {
       for (let slowIndex = fastIndex + 1; slowIndex < this.lines.length; ++slowIndex) {
