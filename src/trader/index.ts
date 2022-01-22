@@ -80,14 +80,14 @@ class Trader {
     }
   }
 
+  private assetDebt = 0;
+
   /**
    * 做空
    * @param frame 帧
    */
   public Short(frame: IFrame) {
-    if (!this.Holding) {
 
-    }
   }
 
   /**
