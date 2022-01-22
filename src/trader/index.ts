@@ -11,11 +11,15 @@ class Trader {
    * @param initFunds 初始资金
    * @param buyFee 购买费率
    * @param sellFee 出售费率
+   * @param shortFee 做空手续费
+   * @param shortDayFee 做空每日费用
    */
   public constructor(
     private initFunds = 100,
     private buyFee = 0.998,
     private sellFee = 0.998,
+    private shortFee = 0.9996,
+    private shortDayFee = 0.9996,
   ) {
     this.funds = this.initFunds;
   }
