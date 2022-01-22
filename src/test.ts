@@ -1,4 +1,4 @@
-import BTCData from './data/coinmarketcap/ada.json';
+import BTCData from './data/coinmarketcap/btc.json';
 import { Load } from './data/coinmarketcap';
 import { Trader } from './trader';
 import { MACDFinder } from './finder/MACDFinder';
@@ -18,3 +18,4 @@ const bills = finder.Find({
 bills.forEach((bill) => {
   bill.LogSummary();
 });
+bills[1].LogAll();

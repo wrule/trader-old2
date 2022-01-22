@@ -2,6 +2,7 @@ import { Nums } from "@wrule/nums";
 import { Bill } from "../bill";
 import { IFrame } from "../frame";
 import { Cross2Line } from "../strategy/Cross2Line";
+import { Cross2LineShort } from "../strategy/Cross2LineShort";
 import { Trader } from "../trader";
 
 export
@@ -25,7 +26,7 @@ class Cross2LineFinder {
     const result: Bill[] = [];
     for (let fastIndex = 0; fastIndex < this.lines.length - 1; ++fastIndex) {
       for (let slowIndex = fastIndex + 1; slowIndex < this.lines.length; ++slowIndex) {
-        const strategy = new Cross2Line(this.trader, this.lines[fastIndex], this.lines[slowIndex]);
+        const strategy = new Cross2LineShort(this.trader, this.lines[fastIndex], this.lines[slowIndex]);
         const bill = strategy.Backtesting(this.frames);
         bill.SetId(`${fastIndex}-${slowIndex}`);
         if (config.filter(bill)) {

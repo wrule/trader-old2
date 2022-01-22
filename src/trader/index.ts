@@ -98,6 +98,7 @@ class Trader {
     if (!this.Holding && !this.ShortHolding) {
       this.shortAssets = this.funds / frame.price;
       this.shortFunds = this.funds * this.shortFee;
+      this.bill.RecordBuy(frame, this);
     }
   }
 
@@ -112,6 +113,7 @@ class Trader {
       this.funds += this.shortFunds;
       this.shortFunds = 0;
       this.shortAssets = 0;
+      this.bill.RecordSell(frame, this);
     }
   }
 
