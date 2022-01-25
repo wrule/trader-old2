@@ -6,6 +6,8 @@ import { MACDFinder2 } from './finder/MACDFinder2';
 import { nums } from '@wrule/nums';
 import { Cross2Line } from './strategy/Cross2Line';
 import { Cross2LineFinder } from './finder/Cross2LineFinder';
+import moment from 'moment';
+import adata from './data/neteasy/000610';
 
 const trader = new Trader(100, 0.998, 0.998);
 const frames = Load(BTCData);
@@ -18,4 +20,4 @@ const bills = finder.Find({
 bills.forEach((bill) => {
   bill.LogSummary();
 });
-bills[1].LogAll();
+console.log(bills.length);
