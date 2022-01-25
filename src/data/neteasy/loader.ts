@@ -11,5 +11,5 @@ function Load(csvText: string): IFrame[] {
   return jsonObject.data.map((item: any) => ({
     time: moment(new Date(item['日期'])).valueOf(),
     price: item['收盘价'],
-  }));
+  })).reverse().sort((a, b) => a.time - b.time);
 }
